@@ -1,0 +1,229 @@
+:root {
+  --bg: #17131f;
+  --panel: #241b2f;
+  --text: #fff8ef;
+  --muted: #d8cde3;
+  --pink: #f6b5d1;
+  --blue: #9ad7ff;
+  --purple: #c5a3ff;
+  --yellow: #fff0a8;
+  --green: #b8f7d4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(246, 181, 209, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(154, 215, 255, 0.16),
+      transparent 35%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.logo,
+.site-header a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo {
+  font-weight: 700;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero,
+.form-page {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 2rem;
+}
+
+.hero h1,
+.form-intro h1 {
+  max-width: 760px;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  margin: 0.5rem 0 1rem;
+  letter-spacing: -0.05em;
+}
+
+.hero p,
+.form-intro p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.eyebrow {
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.map-shell,
+.submit-map-shell {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 1rem auto 4rem;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+#map {
+  height: 70vh;
+  min-height: 460px;
+}
+
+#submit-map {
+  height: 360px;
+}
+
+.map-shell::after,
+.submit-map-shell::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(246, 181, 209, 0.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(154, 215, 255, 0.14),
+      transparent 34%
+    );
+  mix-blend-mode: screen;
+}
+
+.memory-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid white;
+}
+
+.memory-marker.gratitude {
+  background: radial-gradient(circle, #fff7b2, var(--pink));
+  box-shadow: 0 0 22px rgba(246, 181, 209, 0.95);
+}
+
+.memory-marker.recognition {
+  background: radial-gradient(circle, #d6fff6, var(--blue));
+  box-shadow: 0 0 22px rgba(154, 215, 255, 0.95);
+}
+
+.memory-marker.almost_friend {
+  background: radial-gradient(circle, #ffffff, var(--purple));
+  box-shadow: 0 0 24px rgba(197, 163, 255, 0.95);
+}
+
+.memory-marker.hope_okay {
+  background: radial-gradient(circle, #ffffff, var(--green));
+  box-shadow: 0 0 22px rgba(184, 247, 212, 0.9);
+}
+
+.memory-marker.door_open {
+  background: radial-gradient(circle, #ffffff, var(--yellow));
+  box-shadow: 0 0 24px rgba(255, 240, 168, 0.95);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 20px;
+  background: #fff8ef;
+  color: #17131f;
+}
+
+.leaflet-popup-content {
+  font-size: 0.95rem;
+}
+
+.note-category {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.door-open {
+  font-weight: 700;
+}
+
+.note-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 2rem 0 5rem;
+}
+
+.note-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--muted);
+}
+
+.note-form input,
+.note-form textarea,
+.note-form select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 0.8rem;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.checkbox-row {
+  display: flex !important;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+}
+
+.checkbox-row input {
+  width: auto;
+}
+
+.errorlist {
+  color: var(--yellow);
+}
