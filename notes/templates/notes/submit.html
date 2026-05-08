@@ -1,0 +1,51 @@
+{% extends "notes/base.html" %} {% load static %} {% block content %}
+<section class="form-page">
+  <div class="form-intro">
+    <p class="eyebrow">Leave a note</p>
+    <h1>Mark a moment that mattered.</h1>
+    <p>
+      Drop the pin nearby, not exactly. This is a memory map, not a tracking
+      tool.
+    </p>
+  </div>
+
+  <div class="submit-map-shell">
+    <div id="submit-map"></div>
+  </div>
+
+  <form method="post" class="note-form">
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <label> Title {{ form.title }} {{ form.title.errors }} </label>
+
+    <label> What happened? {{ form.body }} {{ form.body.errors }} </label>
+
+    <label> Category {{ form.category }} {{ form.category.errors }} </label>
+
+    <label>
+      Approximate location label {{ form.approximate_location_label }} {{
+      form.approximate_location_label.errors }}
+    </label>
+
+    {{ form.latitude }} {{ form.longitude }}
+
+    <label class="checkbox-row">
+      {{ form.door_left_open }} Leave a gentle door open?
+    </label>
+
+    <label>
+      Optional reconnection note {{ form.reconnection_note }} {{
+      form.reconnection_note.errors }}
+    </label>
+
+    <label class="checkbox-row">
+      {{ form.safety_agreement }} {{ form.safety_agreement.label }} {{
+      form.safety_agreement.errors }}
+    </label>
+
+    <button type="submit" class="button">Submit for moderation</button>
+  </form>
+</section>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'notes/js/submit-map.js' %}"></script>
+{% endblock %}

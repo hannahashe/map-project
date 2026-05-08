@@ -1,0 +1,8 @@
+{% extends "notes/base.html" %} {% block content %}
+<section class="hero">
+  <p class="eyebrow">Thank you</p>
+  <h1>Your note has been submitted.</h1>
+  <p>It will appear on the map after moderation.</p>
+  <a href="{% url 'notes:home' %}" class="button">Back to the map</a>
+</section>
+{% endblock %}
