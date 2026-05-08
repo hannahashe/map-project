@@ -104,13 +104,27 @@ body {
   position: relative;
   border-radius: 32px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(150, 38, 177, 0.14);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.leaflet-tile-pane {
+  filter:
+    grayscale(0.9)
+    sepia(0.18)
+    saturate(0.65)
+    brightness(0.72)
+    contrast(0.95);
 }
 
 #map {
   height: 70vh;
   min-height: 460px;
+  background: #8e69d7;
+}
+
+.map-shell {
+  background: #785bb2;
 }
 
 #submit-map {
@@ -126,12 +140,12 @@ body {
   background:
     radial-gradient(
       circle at 20% 20%,
-      rgba(246, 181, 209, 0.16),
+      rgba(165, 35, 216, 0.16),
       transparent 28%
     ),
     radial-gradient(
       circle at 80% 70%,
-      rgba(154, 215, 255, 0.14),
+      rgba(228, 41, 228, 0.14),
       transparent 34%
     );
   mix-blend-mode: screen;

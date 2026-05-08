@@ -23,8 +23,7 @@
     <label> Category {{ form.category }} {{ form.category.errors }} </label>
 
     <label>
-      Approximate location label {{ form.approximate_location_label }} {{
-      form.approximate_location_label.errors }}
+      Approximate location label {{ form.approximate_location_label }} {{ form.approximate_location_label.errors }}
     </label>
 
     {{ form.latitude }} {{ form.longitude }}
@@ -34,13 +33,13 @@
     </label>
 
     <label>
-      Optional reconnection note {{ form.reconnection_note }} {{
-      form.reconnection_note.errors }}
+      Optional reconnection note {{ form.reconnection_note }}
+       {{ form.reconnection_note.errors }}
     </label>
 
     <label class="checkbox-row">
-      {{ form.safety_agreement }} {{ form.safety_agreement.label }} {{
-      form.safety_agreement.errors }}
+      {{ form.safety_agreement }} {{ form.safety_agreement.label }}
+       {{ form.safety_agreement.errors }}
     </label>
 
     <button type="submit" class="button">Submit for moderation</button>
