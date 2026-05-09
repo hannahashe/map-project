@@ -204,6 +204,78 @@ body {
   font-weight: 700;
 }
 
+.maplibregl-popup-content {
+  border-radius: 22px;
+  background: #fff8ef;
+  color: #17131f;
+  padding: 1rem;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.maplibregl-popup-close-button {
+  font-size: 1.4rem;
+  padding: 0.4rem 0.6rem;
+  color: #17131f;
+}
+
+.note-popup {
+  max-width: 300px;
+}
+
+.note-popup h2 {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.note-popup p {
+  line-height: 1.5;
+}
+
+.note-category {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(23, 19, 31, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+}
+
+.door-open {
+  font-weight: 700;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto 1rem;
+}
+
+.filter-bar button {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.filter-bar button:hover,
+.filter-bar button.active {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+
 .note-form {
   display: grid;
   gap: 1rem;
