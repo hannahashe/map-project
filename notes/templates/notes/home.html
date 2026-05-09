@@ -9,9 +9,19 @@
   <a href="{% url 'notes:submit' %}" class="button">Leave a note</a>
 </section>
 
+<div class="filter-bar" aria-label="Filter notes by category">
+  <button type="button" class="active" data-category="all">All</button>
+  <button type="button" data-category="gratitude">Gratitude</button>
+  <button type="button" data-category="recognition">Recognition</button>
+  <button type="button" data-category="almost_friend">Almost friends</button>
+  <button type="button" data-category="hope_okay">Hope you're okay</button>
+  <button type="button" data-category="door_open">Door left open</button>
+</div>
+
 <section class="map-shell">
   <div id="map"></div>
 </section>
+
 {% endblock %} {% block extra_js %}
 <script src="{% static 'notes/js/map.js' %}"></script>
 {% endblock %}
