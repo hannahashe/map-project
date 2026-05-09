@@ -6,10 +6,9 @@
     <meta charset="UTF-8" />
     <title>If This Was You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css"
+    rel="stylesheet"
     />
 
     <link rel="stylesheet" href="{% static 'notes/css/styles.css' %}" />
@@ -26,7 +25,7 @@
 
     <main>{% block content %} {% endblock %}</main>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
 
     {% block extra_js %} {% endblock %}
   </body>
