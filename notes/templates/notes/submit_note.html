@@ -45,6 +45,10 @@
     <button type="submit" class="button">Submit for moderation</button>
   </form>
 </section>
-{% endblock %} {% block extra_js %}
+{% endblock %} 
+{% block extra_js %}
+<script>
+  window.MAPTILER_KEY = "{{ maptiler_key|escapejs }}";
+</script>
 <script src="{% static 'notes/js/submit-map.js' %}"></script>
 {% endblock %}

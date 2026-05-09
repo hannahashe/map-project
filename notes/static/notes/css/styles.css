@@ -1,3 +1,4 @@
+/* Colour Pallet variables */
 :root {
   --bg: #17131f;
   --panel: #241b2f;
@@ -10,27 +11,33 @@
   --green: #b8f7d4;
 }
 
+/* Global Styles */
+
 * {
   box-sizing: border-box;
 }
+
+/* Body Styles */
 
 body {
   margin: 0;
   background:
     radial-gradient(
       circle at top left,
-      rgba(246, 181, 209, 0.18),
+      rgba(0, 0, 0, 0.18),
       transparent 30%
     ),
     radial-gradient(
       circle at bottom right,
-      rgba(154, 215, 255, 0.16),
+      rgba(0, 0, 0, 0.16),
       transparent 35%
     ),
     var(--bg);
   color: var(--text);
   font-family: system-ui, sans-serif;
 }
+
+/* Site Header & Navigation */
 
 .site-header {
   display: flex;
@@ -54,6 +61,8 @@ body {
   display: flex;
   gap: 1rem;
 }
+
+/* Hero */
 
 .hero,
 .form-page {
@@ -97,6 +106,8 @@ body {
   cursor: pointer;
 }
 
+/* Map Styles */
+
 .map-shell,
 .submit-map-shell {
   width: min(1100px, calc(100% - 2rem));
@@ -106,15 +117,6 @@ body {
   overflow: hidden;
   border: 1px solid rgba(150, 38, 177, 0.14);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-}
-
-.leaflet-tile-pane {
-  filter:
-    grayscale(0.9)
-    sepia(0.18)
-    saturate(0.65)
-    brightness(0.72)
-    contrast(0.95);
 }
 
 #map {
@@ -127,6 +129,8 @@ body {
   background: #785bb2;
 }
 
+/* Submit Map Styles */
+
 #submit-map {
   height: 360px;
 }
@@ -137,7 +141,7 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  background:
+  /* background:
     radial-gradient(
       circle at 20% 20%,
       rgba(165, 35, 216, 0.16),
@@ -147,9 +151,11 @@ body {
       circle at 80% 70%,
       rgba(228, 41, 228, 0.14),
       transparent 34%
-    );
+    ); */
   mix-blend-mode: screen;
 }
+
+/* Marker Styles */
 
 .memory-marker {
   width: 22px;
@@ -183,25 +189,13 @@ body {
   box-shadow: 0 0 24px rgba(255, 240, 168, 0.95);
 }
 
-.leaflet-popup-content-wrapper {
-  border-radius: 20px;
-  background: #fff8ef;
-  color: #17131f;
-}
-
-.leaflet-popup-content {
-  font-size: 0.95rem;
-}
+/* Note Popup Styles */
 
 .note-category {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.7rem;
   opacity: 0.7;
-}
-
-.door-open {
-  font-weight: 700;
 }
 
 .maplibregl-popup-content {
@@ -247,6 +241,8 @@ body {
   font-weight: 700;
 }
 
+/* Filter Bar Styles */
+
 .filter-bar {
   display: flex;
   gap: 0.6rem;
@@ -275,6 +271,8 @@ body {
   border-color: rgba(255, 255, 255, 0.32);
 }
 
+/* Ghost Button Styles */
+
 .ghost-button {
   display: block;
   width: fit-content;
@@ -297,6 +295,19 @@ body {
   background: rgba(255, 255, 255, 0.14);
   border-color: rgba(255, 255, 255, 0.34);
 }
+
+/* Selected Submit Marker Styles */
+
+.selected-submit-marker {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #ffffff, #f6b5d1);
+  border: 1px solid white;
+  box-shadow: 0 0 24px rgba(246, 181, 209, 0.95);
+}
+
+/* Note Form Styles */
 
 .note-form {
   display: grid;
