@@ -6,6 +6,7 @@ from .forms import ConnectionNoteForm
 from .models import ConnectionNote
 
 
+
 class HomeView(TemplateView):
     template_name = "notes/home.html"
 
@@ -44,3 +45,35 @@ def approved_notes_json(request):
     ]
 
     return JsonResponse({"notes": data})
+
+def approved_notes_geojson(request):
+    notes = ConnectionNote.objects.filter(approved=True)
+
+    features = []
+
+    for note in notes:
+        features.append({
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    float(note.longitude),
+                    float(note.latitude),
+                ],
+            },
+            "properties": {
+                "id": note.id,
+                "title": note.title,
+                "body": note.body,
+                "category": note.category,
+                "category_display": note.get_category_display(),
+                "door_left_open": note.door_left_open,
+                "reconnection_note": note.reconnection_note,
+                "location_label": note.approximate_location_label,
+            },
+        })
+
+    return JsonResponse({
+        "type": "FeatureCollection",
+        "features": features,
+    })
