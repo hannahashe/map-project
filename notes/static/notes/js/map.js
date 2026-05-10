@@ -1,5 +1,7 @@
 const MAPTILER_KEY = window.MAPTILER_KEY;
 let hoveredNoteId = null;
+let isSubmittingNote = false;
+let selectedSubmitMarker = null;
 
 const map = new maplibregl.Map({
   container: "map",
@@ -9,6 +11,13 @@ const map = new maplibregl.Map({
 });
 
 map.addControl(new maplibregl.NavigationControl(), "bottom-left");
+
+const latInput = document.querySelector("#id_latitude");
+const lngInput = document.querySelector("#id_longitude");
+const submitModal = document.querySelector("#submit-modal");
+const openSubmitButton = document.querySelector("#open-submit-modal");
+const closeSubmitButton = document.querySelector("#close-submit-modal");
+const locationStatus = document.querySelector("#location-status");
 
 function escapeHtml(value) {
   const div = document.createElement("div");
@@ -51,6 +60,73 @@ function makePopupHtml(properties) {
     </article>
   `;
 }
+
+function softenCoordinate(value) {
+  return Number(value).toFixed(3);
+}
+
+function openSubmitModal() {
+  if (!submitModal) return;
+
+  submitModal.hidden = false;
+  isSubmittingNote = true;
+
+  if (locationStatus) {
+    locationStatus.textContent =
+      "Click the map to place this note nearby, not exactly.";
+  }
+}
+
+function closeSubmitModal() {
+  if (!submitModal) return;
+
+  submitModal.hidden = true;
+  isSubmittingNote = false;
+
+  if (selectedSubmitMarker) {
+    selectedSubmitMarker.remove();
+    selectedSubmitMarker = null;
+  }
+
+  if (latInput) latInput.value = "";
+  if (lngInput) lngInput.value = "";
+}
+
+if (openSubmitButton) {
+  openSubmitButton.addEventListener("click", openSubmitModal);
+}
+
+if (closeSubmitButton) {
+  closeSubmitButton.addEventListener("click", closeSubmitModal);
+}
+
+map.on("click", (event) => {
+  if (!isSubmittingNote) return;
+
+  const lng = softenCoordinate(event.lngLat.lng);
+  const lat = softenCoordinate(event.lngLat.lat);
+
+  if (latInput) latInput.value = lat;
+  if (lngInput) lngInput.value = lng;
+
+  if (locationStatus) {
+    locationStatus.textContent =
+      "Location added. Click elsewhere to move it.";
+  }
+
+  if (selectedSubmitMarker) {
+    selectedSubmitMarker.setLngLat([lng, lat]);
+  } else {
+    const markerElement = document.createElement("div");
+    markerElement.className = "selected-submit-marker";
+
+    selectedSubmitMarker = new maplibregl.Marker({
+      element: markerElement,
+    })
+      .setLngLat([lng, lat])
+      .addTo(map);
+  }
+});
 
 function layerExists(layerId) {
   return Boolean(map.getLayer(layerId));
@@ -294,6 +370,8 @@ map.on("load", () => {
   });
 
   map.on("click", "note-core", (event) => {
+    if (isSubmittingNote) return;
+
     const feature = event.features[0];
     const coordinates = feature.geometry.coordinates.slice();
     const properties = feature.properties;
