@@ -1,6 +1,6 @@
 {% extends "notes/base.html" %} {% load static %} {% block content %}
 
-
+<!-- Filter Bar -->
 <div class="filter-bar" aria-label="Filter notes by category">
   <button type="button" class="active" data-category="all">All</button>
   <button type="button" data-category="gratitude">Gratitude</button>
@@ -10,16 +10,19 @@
   <button type="button" data-category="door_open">Door left open</button>
 </div>
 
+<!-- Random Note Button -->
 <button id="random-note-button" class="ghost-button" type="button">
   Show me something kind
 </button>
 
+<!-- Map Shell -->
 <section class="map-shell">
+  <!-- Map Container -->
   <div id="map"></div>
-
+  <!-- Map Title Overlay -->
   <div class="map-title-overlay">
     <p class="eyebrow">Interactive memory map</p>
-    <h1>If This Was You</h1>
+    <h1>If That Was You</h1>
     <p>
       A soft map of fleeting connection, unsent gratitude,
       almost-friendship, and moments of recognition.
@@ -30,8 +33,10 @@
 
 {% endblock %}
 {% block extra_js %}
+<!-- Maptiler Key -->
 <script>
   window.MAPTILER_KEY = "{{ maptiler_key|escapejs }}";
 </script>
+<!-- Custom Map Script -->
 <script src="{% static 'notes/js/map.js' %}"></script>
 {% endblock %}
