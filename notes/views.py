@@ -8,12 +8,14 @@ from .models import ConnectionNote
 
 
 
+
 class HomeView(TemplateView):
     template_name = "notes/home.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["maptiler_key"] = settings.MAPTILER_KEY
+        context["form"] = ConnectionNoteForm()
         return context
 
 class ThanksView(TemplateView):
