@@ -9,6 +9,7 @@
   --purple: #c5a3ff;
   --yellow: #fff0a8;
   --green: #b8f7d4;
+  /* Map Colors */
   --map-residential: #4F2D48;
   --map-bg: #1D1624;
   --map-road:#865F71;
@@ -124,11 +125,12 @@ body {
   bottom: clamp(1rem, 4vw, 3rem);
   z-index: 10;
 
-  max-width: 440px;
-  padding: 1.25rem 1.35rem;
+  width: 1000px;
+  min-width: 200px;
+  padding: 1rem 1rem;
 
-  background: #fff8ef;
-  color: #17131f;
+  background: rgb(23, 19, 31, 0.35);
+  color: var(--text);
   border-radius: 6px;
 
   transform: rotate(-1deg);
@@ -138,14 +140,15 @@ body {
 
 .map-title-overlay h1 {
   margin: 0.25rem 0 0.75rem;
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-size: clamp(3.6rem, 7vw, 6.5rem);
   line-height: 0.88;
   letter-spacing: -0.07em;
 }
 
 .map-title-overlay p {
   margin: 0 0 0.8rem;
-  color: var(--muted);
+  font-size: 2rem;
+  color: var(--text);
 }
 
 .map-title-overlay .eyebrow {
@@ -157,10 +160,6 @@ body {
   margin-top: 0.5rem;
 }
 
-.map-title-overlay .eyebrow,
-.map-title-overlay p {
-  color: #5e5368;
-}
 
 /* Map Styles */
 
@@ -405,6 +404,7 @@ body {
 }
 
 /* Responsive Styles */
+
 @media (max-width: 700px) {
   .map-title-overlay {
     left: 1rem;
