@@ -27,9 +27,44 @@
       A soft map of fleeting connection, unsent gratitude,
       almost-friendship, and moments of recognition.
     </p>
-    <a href="{% url 'notes:submit' %}" class="button">Leave a note</a>
+ <button id="open-submit-modal" class="button" type="button">
+  Leave a note
+</button>
+
   </div>
 </section>
+
+<!-- Note form pop up -->
+<p id="location-status" class="location-status">
+  Click the map to place this note nearby, not exactly.
+</p>
+
+<div id="submit-modal" class="submit-modal" hidden>
+  <div class="submit-modal-panel">
+    <button id="close-submit-modal" type="button" class="modal-close">
+      ×
+    </button>
+
+    <h2>Leave a note</h2>
+    <p>Click the map to place this memory nearby, not exactly.</p>
+
+    <form method="post" action="{% url 'notes:submit' %}" class="note-form">
+      {% csrf_token %}
+
+      {{ form.title }}
+      {{ form.body }}
+      {{ form.category }}
+      {{ form.approximate_location_label }}
+      {{ form.latitude }}
+      {{ form.longitude }}
+      {{ form.door_left_open }}
+      {{ form.reconnection_note }}
+      {{ form.safety_agreement }}
+
+      <button type="submit" class="button">Submit for moderation</button>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
 {% block extra_js %}
