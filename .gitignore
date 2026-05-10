@@ -3,7 +3,9 @@ venv/
 env.py
 env/
 __pycache__/
+__pycache__/
+*.py[cod]
+*$py.class
 *.pyc
 db.sqlite3
 media/
-config/__pycache__/settings.cpython-312.pyc
