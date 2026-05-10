@@ -6,25 +6,28 @@
     <meta charset="UTF-8" />
     <title>If This Was You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Maplibre GL CSS -->
     <link
     href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css"
     rel="stylesheet"
     />
-
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'notes/css/styles.css' %}" />
   </head>
   <body>
+    <!-- Header & Navigation -->
     <header class="site-header">
-      <a href="{% url 'notes:home' %}" class="logo">If This Was You</a>
+      <a href="{% url 'notes:home' %}" class="logo">If That Was You</a>
 
       <nav>
         <a href="{% url 'notes:home' %}">Map</a>
         <a href="{% url 'notes:submit' %}">Leave a note</a>
       </nav>
     </header>
-
+    <!-- Main Content -->
     <main>{% block content %} {% endblock %}</main>
 
+    <!-- Maplibre GL JS -->
     <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
 
     {% block extra_js %} {% endblock %}
