@@ -8,7 +8,7 @@ const map = new maplibregl.Map({
   zoom: 12,
 });
 
-map.addControl(new maplibregl.NavigationControl(), "bottom-right");
+map.addControl(new maplibregl.NavigationControl(), "bottom-left");
 
 function escapeHtml(value) {
   const div = document.createElement("div");
@@ -70,70 +70,76 @@ function setLayoutIfExists(layerId, property, value) {
 
 function applySoftNightStyle() {
   // Background & residential color
-  setPaintIfExists("Background", "background-color", "#000000");
+  setPaintIfExists("Background", "background-color", "#1D1624");
 
-  setPaintIfExists("Residential", "fill-color", "#000000");
+  setPaintIfExists("Residential", "fill-color", "#4F2D48");
   setPaintIfExists("Residential", "fill-opacity", 0.95);
 
   // Other land use colors
-  setPaintIfExists("Forest", "fill-color", "#000000");
-  setPaintIfExists("Grass", "fill-color", "#000000");
-  setPaintIfExists("Wood", "fill-color", "#000000");
-  setPaintIfExists("Sand", "fill-color", "#000000");
+  setPaintIfExists("Forest", "fill-color", "#1D1624");
+  setPaintIfExists("Grass", "fill-color", "#1D1624");
+  setPaintIfExists("Wood", "fill-color", "#1D1624");
+  setPaintIfExists("Sand", "fill-color", "#1D1624");
 
   // Water colors
-  setPaintIfExists("Water", "fill-color", "#000000"); 
+  setPaintIfExists("Water", "fill-color", "#3B325C"); 
   setPaintIfExists("Water", "fill-opacity", 0.9);
 
   // River line colors
-  setPaintIfExists("River", "line-color", "#1c00b8");
+  setPaintIfExists("River", "line-color", "#3B325C");
   setPaintIfExists("River", "line-opacity", 0.85);
-  setPaintIfExists("River intermittent", "line-color", "#2e0092");
+  setPaintIfExists("River intermittent", "line-color", "#3B325C");
   setPaintIfExists("River intermittent", "line-opacity", 0.45);
 
   // Road colors
-  setPaintIfExists("Road network", "line-color", "#ffffff");
+  setPaintIfExists("Road network", "line-color", "#865F71");
   setPaintIfExists("Road network", "line-opacity", 0.32);
 
   // Foot Path colors
-  setPaintIfExists("Path", "line-color", "#ffffff");
+  setPaintIfExists("Path", "line-color", "#C67F98");
   setPaintIfExists("Path", "line-opacity", 0.25);
 
-  setPaintIfExists("Path minor", "line-color", "#ffffff");
+  setPaintIfExists("Path minor", "line-color", "#C67F98");
   setPaintIfExists("Path minor", "line-opacity", 0.18);
 
   // Railway colors
-  setPaintIfExists("Railway", "line-color", "#9a9a9a");
+  setPaintIfExists("Railway", "line-color", "#865F71");
   setPaintIfExists("Railway", "line-opacity", 0.25);
 
   // Transit colors
-  setPaintIfExists("Transit", "line-color", "#adadad");
+  setPaintIfExists("Transit", "line-color", "#865F71");
   setPaintIfExists("Transit", "line-opacity", 0.25);
 
-  setPaintIfExists("Transit tunnel", "line-color", "#6f628a");
+  setPaintIfExists("Transit tunnel", "line-color", "#865F71");
   setPaintIfExists("Transit tunnel", "line-opacity", 0.16);
 
   // Building colors
-  setPaintIfExists("Building", "fill-color", "#ffffff");
+  setPaintIfExists("Building", "fill-color", "#4F2D48");
   setPaintIfExists("Building", "fill-opacity", 0.38);
 
   // Road Label colors
-  setPaintIfExists("Road labels", "text-color", "#a99abd");
-  setPaintIfExists("Road labels", "text-halo-color", "#17131f");
+  setPaintIfExists("Road labels", "text-color", "#C67F98");
+  setPaintIfExists("Road labels", "text-halo-color", "#C67F98");
   setPaintIfExists("Road labels", "text-halo-width", 1);
 
   // Station, place, city,  label colors
-  setPaintIfExists("Station labels", "text-color", "#cbbde1");
-  setPaintIfExists("Station labels", "text-halo-color", "#17131f");
+  setPaintIfExists("Station labels", "text-color", "#fff8f0");
+  setPaintIfExists("Station labels", "text-halo-color", "#4F2D48");
   setPaintIfExists("Station labels", "text-halo-width", 1.2);
 
-  setPaintIfExists("Place labels", "text-color", "#d8cde3");
-  setPaintIfExists("Place labels", "text-halo-color", "#17131f");
+  setPaintIfExists("Place labels", "text-color", "#fff8f0");
+  setPaintIfExists("Place labels", "text-halo-color", "#4F2D48");
   setPaintIfExists("Place labels", "text-halo-width", 1.3);
 
-  setPaintIfExists("City labels", "text-color", "#fff8ef");
-  setPaintIfExists("City labels", "text-halo-color", "#17131f");
+  setPaintIfExists("City labels", "text-color", "#fff8f0");
+  setPaintIfExists("City labels", "text-halo-color", "#4F2D48");
   setPaintIfExists("City labels", "text-halo-width", 1.5);
+
+  // Label sizing
+  setLayoutIfExists("Place labels", "text-size", 18);
+  setLayoutIfExists("City labels", "text-size", 23);
+  setLayoutIfExists("Station labels", "text-size", 13);
+  setLayoutIfExists("Road labels", "text-size", 11);
 
   // Hide POI labels
   setLayoutIfExists("Airport labels", "visibility", "none");

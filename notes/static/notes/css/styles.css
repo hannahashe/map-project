@@ -2,13 +2,19 @@
 :root {
   --bg: #17131f;
   --panel: #241b2f;
-  --text: #fff8ef;
+  --text: #fff8f0;
   --muted: #d8cde3;
   --pink: #f6b5d1;
   --blue: #9ad7ff;
   --purple: #c5a3ff;
   --yellow: #fff0a8;
   --green: #b8f7d4;
+  --map-residential: #4F2D48;
+  --map-bg: #1D1624;
+  --map-road:#865F71;
+  --map-grass: #3B4341;
+  --map-path: #C67F98;
+  --map-water: #3B325C;
 }
 
 /* Global Styles */
@@ -40,11 +46,15 @@ body {
 /* Site Header & Navigation */
 
 .site-header {
-  display: flex;
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem clamp(1rem, 4vw, 3rem);
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
 }
 
 .logo,
@@ -106,21 +116,68 @@ body {
   cursor: pointer;
 }
 
+/* Map Title Overlay */
+
+.map-title-overlay {
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: clamp(1rem, 4vw, 3rem);
+  z-index: 10;
+
+  max-width: 440px;
+  padding: 1.25rem 1.35rem;
+
+  background: #fff8ef;
+  color: #17131f;
+  border-radius: 6px;
+
+  transform: rotate(-1deg);
+  box-shadow: 10px 12px 0 rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(23, 19, 31, 0.28);
+}
+
+.map-title-overlay h1 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+}
+
+.map-title-overlay p {
+  margin: 0 0 0.8rem;
+  color: var(--muted);
+}
+
+.map-title-overlay .eyebrow {
+  margin-bottom: 0.35rem;
+  color: var(--pink);
+}
+
+.map-title-overlay .button {
+  margin-top: 0.5rem;
+}
+
+.map-title-overlay .eyebrow,
+.map-title-overlay p {
+  color: #5e5368;
+}
+
 /* Map Styles */
 
 .map-shell,
 .submit-map-shell {
-  width: min(1100px, calc(100% - 2rem));
-  margin: 1rem auto 4rem;
-  position: relative;
-  border-radius: 32px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  position: fixed;
+  inset: 0;
   border: 1px solid rgba(150, 38, 177, 0.14);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 }
 
 #map {
-  height: 70vh;
+  height: 100%;
   min-height: 460px;
   background: #8e69d7;
 }
@@ -345,4 +402,19 @@ body {
 
 .errorlist {
   color: var(--yellow);
+}
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+  .map-title-overlay {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+    padding: 1rem;
+  }
+
+  .map-title-overlay h1 {
+    font-size: 2.6rem;
+  }
 }

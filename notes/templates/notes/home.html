@@ -1,13 +1,5 @@
 {% extends "notes/base.html" %} {% load static %} {% block content %}
-<section class="hero">
-  <p class="eyebrow">A soft map of fleeting connection</p>
-  <h1>For the strangers, almost-friends, and small moments that stayed.</h1>
-  <p>
-    Leave an anonymous note for a moment of gratitude, recognition,
-    almost-friendship, or a gentle door left open.
-  </p>
-  <a href="{% url 'notes:submit' %}" class="button">Leave a note</a>
-</section>
+
 
 <div class="filter-bar" aria-label="Filter notes by category">
   <button type="button" class="active" data-category="all">All</button>
@@ -24,6 +16,16 @@
 
 <section class="map-shell">
   <div id="map"></div>
+
+  <div class="map-title-overlay">
+    <p class="eyebrow">Interactive memory map</p>
+    <h1>If This Was You</h1>
+    <p>
+      A soft map of fleeting connection, unsent gratitude,
+      almost-friendship, and moments of recognition.
+    </p>
+    <a href="{% url 'notes:submit' %}" class="button">Leave a note</a>
+  </div>
 </section>
 
 {% endblock %}
