@@ -327,53 +327,49 @@ function createNoteIconImage() {
   canvas.width = size;
   canvas.height = size;
 
-  // Outer glow
-  const gradient = context.createRadialGradient(
-    size / 2,
-    size / 2,
-    4,
-    size / 2,
-    size / 2,
-    size / 2
-  );
+  const cx = size / 2;
+  const cy = size / 2;
 
-  gradient.addColorStop(0, "rgba(255, 248, 240, 0.95)");
-  gradient.addColorStop(0.4, "rgba(246, 181, 209, 0.7)");
-  gradient.addColorStop(1, "rgba(246, 181, 209, 0)");
+  // Glow
+  const gradient = context.createRadialGradient(cx, cy, 4, cx, cy, 30);
+  gradient.addColorStop(0, "rgba(157, 163, 214, 1)");
+  gradient.addColorStop(0.35, "rgba(157, 163, 214, 0.8)");
+  gradient.addColorStop(1, "rgba(157, 163, 214, 0)");
 
   context.fillStyle = gradient;
   context.beginPath();
-  context.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+  context.arc(cx, cy, 30, 0, Math.PI * 2);
   context.fill();
 
-  // Hand-drawn-ish cross
-  context.strokeStyle = "#fff8f0";
-  context.lineWidth = 7;
+  context.strokeStyle = "#d8cde3";
+  context.lineWidth = 4.5;
   context.lineCap = "round";
 
+  // Slightly irregular spark arms
   context.beginPath();
-  context.moveTo(22, 22);
-  context.lineTo(42, 42);
+  context.moveTo(cx, cy - 20);
+  context.lineTo(cx, cy + 20);
   context.stroke();
 
   context.beginPath();
-  context.moveTo(42, 22);
-  context.lineTo(22, 42);
-  context.stroke();
-
-  // Inner colour shadow/offset for zine effect
-  context.strokeStyle = "#f6b5d1";
-  context.lineWidth = 3;
-
-  context.beginPath();
-  context.moveTo(23, 21);
-  context.lineTo(43, 41);
+  context.moveTo(cx - 13, cy + 1);
+  context.lineTo(cx + 15, cy - 1);
   context.stroke();
 
   context.beginPath();
-  context.moveTo(43, 21);
-  context.lineTo(23, 41);
+  context.moveTo(cx - 8, cy - 10);
+  context.lineTo(cx + 10, cy + 8);
   context.stroke();
+
+  context.beginPath();
+  context.moveTo(cx + 10, cy - 8);
+  context.lineTo(cx - 8, cy + 10);
+  context.stroke();
+
+  context.fillStyle = "#d8cde3";
+  context.beginPath();
+  context.arc(cx, cy, 3.5, 0, Math.PI * 2);
+  context.fill();
 
   return context.getImageData(0, 0, size, size);
 }
@@ -406,37 +402,37 @@ map.on("load", () => {
   // Soft glow layer with category-based coloring and dynamic sizing based on zoom level
 
   // SOFT AREA LAYER
-  map.addLayer({
-  id: "note-soft-area",
-  type: "circle",
-  source: "notes",
-  paint: {
-    "circle-radius": [
-      "interpolate",
-      ["linear"],
-      ["zoom"],
-      10, 16,
-      14, 40,
-      17, 90,
-    ],
-    "circle-blur": 1,
-    "circle-opacity": 0.12,
-    "circle-color": categoryColourExpression(),
-    },
-  });
+  // map.addLayer({
+  // id: "note-soft-area",
+  // type: "circle",
+  // source: "notes",
+  // paint: {
+  //   "circle-radius": [
+  //     "interpolate",
+  //     ["linear"],
+  //     ["zoom"],
+  //     10, 16,
+  //     14, 40,
+  //     17, 90,
+  //   ],
+  //   "circle-blur": 1,
+  //   "circle-opacity": 0.12,
+  //   "circle-color": categoryColourExpression(),
+  //   },
+  // });
 
 // GLOW LAYER
-  map.addLayer({
-    id: "note-glow",
-    type: "circle",
-    source: "notes",
-    paint: {
-      "circle-radius": 18,
-      "circle-blur": 0.8,
-      "circle-opacity": 0.7,
-      "circle-color": categoryColourExpression(),
-    },
-  });
+  // map.addLayer({
+  //   id: "note-glow",
+  //   type: "circle",
+  //   source: "notes",
+  //   paint: {
+  //     "circle-radius": 18,
+  //     "circle-blur": 0.8,
+  //     "circle-opacity": 0.7,
+  //     "circle-color": categoryColourExpression(),
+  //   },
+  // });
 
 // ICON LAYER 
 map.addLayer({
@@ -449,9 +445,9 @@ map.addLayer({
       "interpolate",
       ["linear"],
       ["zoom"],
-      10, 0.45,
-      14, 0.65,
-      17, 0.9,
+      10, 1.0,
+      14, 1.35,
+      17, 1.7,
     ],
     "icon-allow-overlap": true,
     "icon-ignore-placement": true,
