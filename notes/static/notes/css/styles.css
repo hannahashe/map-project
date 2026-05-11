@@ -4,11 +4,11 @@
   --panel: #241b2f;
   --text: #fff8f0;
   --muted: #d8cde3;
-  --pink: #f6b5d1;
-  --blue: #9ad7ff;
-  --purple: #c5a3ff;
-  --yellow: #fff0a8;
-  --green: #b8f7d4;
+  --pink: #d8a6bf; /* muted mauve */
+  --blue: #7fb2cc; /* desaturated cool blue */
+  --purple: #9da3d6; /* soft cool lavender */
+  --yellow: #e6ddb4; /* muted warm-neutral (cooler tone) */
+  --green: #97b9a8; /* sage */
   /* Map Colors */
   --map-residential: #4F2D48;
   --map-bg: #1D1624;
