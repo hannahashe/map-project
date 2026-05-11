@@ -239,11 +239,11 @@ function categoryColourExpression() {
   return [
     "match",
     ["get", "category"],
-    "gratitude", "#f6b5d1",
+    "gratitude", "#ffffff",
     "recognition", "#9ad7ff",
-    "almost_friend", "#c5a3ff",
-    "hope_okay", "#b8f7d4",
-    "door_open", "#fff0a8",
+    "almost_friend", "#ffffff",
+    "hope_okay", "#ffffff",
+    "door_open", "#ffffff",
     "#ffffff",
   ];
 }
@@ -268,8 +268,7 @@ function addCategoryFilters() {
       [
         "note-soft-area",
         "note-glow",
-        "note-core",
-        "note-hover",
+        "note-icon",
       ].forEach((layerId) => {
         if (map.getLayer(layerId)) {
           map.setFilter(layerId, filter);
@@ -278,6 +277,7 @@ function addCategoryFilters() {
     });
   });
 }
+
 
 // Random note button handling to fly to a random note and open its popup
 
@@ -337,8 +337,8 @@ function createNoteIconImage() {
     size / 2
   );
 
-  gradient.addColorStop(0, "rgba(255, 248, 240, 1)");
-  gradient.addColorStop(0.35, "rgba(246, 181, 209, 0.95)");
+  gradient.addColorStop(0, "rgba(255, 248, 240, 0.95)");
+  gradient.addColorStop(0.4, "rgba(246, 181, 209, 0.7)");
   gradient.addColorStop(1, "rgba(246, 181, 209, 0)");
 
   context.fillStyle = gradient;
@@ -346,18 +346,34 @@ function createNoteIconImage() {
   context.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
   context.fill();
 
-  // Main dot
-  context.fillStyle = "#fff8f0";
-  context.beginPath();
-  context.arc(size / 2, size / 2, 9, 0, Math.PI * 2);
-  context.fill();
+  // Hand-drawn-ish cross
+  context.strokeStyle = "#fff8f0";
+  context.lineWidth = 7;
+  context.lineCap = "round";
 
-  // Small heart-ish mark
-  context.fillStyle = "#4F2D48";
-  context.font = "bold 18px serif";
-  context.textAlign = "center";
-  context.textBaseline = "middle";
-  context.fillText("♥", size / 2, size / 2 + 1);
+  context.beginPath();
+  context.moveTo(22, 22);
+  context.lineTo(42, 42);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(42, 22);
+  context.lineTo(22, 42);
+  context.stroke();
+
+  // Inner colour shadow/offset for zine effect
+  context.strokeStyle = "#f6b5d1";
+  context.lineWidth = 3;
+
+  context.beginPath();
+  context.moveTo(23, 21);
+  context.lineTo(43, 41);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(43, 21);
+  context.lineTo(23, 41);
+  context.stroke();
 
   return context.getImageData(0, 0, size, size);
 }
@@ -368,7 +384,9 @@ map.on("load", () => {
   console.log(map.getStyle().layers.map((layer) => layer.id));
 // Apply custom soft night style adjustments to the base map for a cohesive aesthetic with the note markers and popups
   applySoftNightStyle();
-// Add custom note icon image to the map style for  future use 
+
+// Add custom note icon image to the map style for future use
+
     if (!map.hasImage("note-icon-image")) {
     map.addImage("note-icon-image", createNoteIconImage(), {
       pixelRatio: 2,
@@ -386,6 +404,8 @@ map.on("load", () => {
   // Layer order: soft glow, hover effect, then core circle for crispness and interactivity
 
   // Soft glow layer with category-based coloring and dynamic sizing based on zoom level
+
+  // SOFT AREA LAYER
   map.addLayer({
   id: "note-soft-area",
   type: "circle",
@@ -405,6 +425,7 @@ map.on("load", () => {
     },
   });
 
+// GLOW LAYER
   map.addLayer({
     id: "note-glow",
     type: "circle",
@@ -417,35 +438,55 @@ map.on("load", () => {
     },
   });
 
-  
-  map.addLayer({
-  id: "note-hover",
-  type: "circle",
+// ICON LAYER 
+map.addLayer({
+  id: "note-icon",
+  type: "symbol",
   source: "notes",
-  paint: {
-    "circle-radius": 22,
-    "circle-blur": 0.7,
-    "circle-color": "#fff8ef",
-    "circle-opacity": [
-      "case",
-      ["boolean", ["feature-state", "hover"], false],
-      0.75,
-      0,
+  layout: {
+    "icon-image": "note-icon-image",
+    "icon-size": [
+      "interpolate",
+      ["linear"],
+      ["zoom"],
+      10, 0.45,
+      14, 0.65,
+      17, 0.9,
     ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
   },
 });
 
-  map.addLayer({
-    id: "note-core",
-    type: "circle",
-    source: "notes",
-    paint: {
-      "circle-radius": 5,
-      "circle-color": categoryColourExpression(),
-    },
-  });
+  
+//   map.addLayer({
+//   id: "note-hover",
+//   type: "circle",
+//   source: "notes",
+//   paint: {
+//     "circle-radius": 22,
+//     "circle-blur": 0.7,
+//     "circle-color": "#fff8ef",
+//     "circle-opacity": [
+//       "case",
+//       ["boolean", ["feature-state", "hover"], false],
+//       0.75,
+//       0,
+//     ],
+//   },
+// });
 
-  map.on("click", "note-core", (event) => {
+  // map.addLayer({
+  //   id: "note-core",
+  //   type: "circle",
+  //   source: "notes",
+  //   paint: {
+  //     "circle-radius": 5,
+  //     "circle-color": categoryColourExpression(),
+  //   },
+  // });
+
+  map.on("click", "note-icon", (event) => {
     if (isSubmittingNote) return;
 
     const feature = event.features[0];
@@ -463,7 +504,7 @@ map.on("load", () => {
   });
 
 
-  map.on("mousemove", "note-core", (event) => {
+  map.on("mousemove", "note-icon", (event) => {
     if (event.features.length > 0) {
       if (hoveredNoteId !== null) {
         map.setFeatureState(
@@ -483,7 +524,7 @@ map.on("load", () => {
     map.getCanvas().style.cursor = "pointer";
   });
 
-map.on("mouseleave", "note-core", () => {
+map.on("mouseleave", "note-icon", () => {
   if (hoveredNoteId !== null) {
     map.setFeatureState(
       { source: "notes", id: hoveredNoteId },
