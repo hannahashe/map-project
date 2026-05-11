@@ -25,6 +25,8 @@ function escapeHtml(value) {
   return div.innerHTML;
 }
 
+// Pop up HTML generation with proper escaping and conditional sections
+
 function makePopupHtml(properties) {
   const doorOpen =
     properties.door_left_open === true ||
@@ -61,9 +63,13 @@ function makePopupHtml(properties) {
   `;
 }
 
+// Softening coordinates to encourage approximate placements and protect privacy
+
 function softenCoordinate(value) {
   return Number(value).toFixed(3);
 }
+
+// Submit modal handling with map interaction for note placement
 
 function openSubmitModal() {
   if (!submitModal) return;
@@ -100,6 +106,8 @@ if (closeSubmitButton) {
   closeSubmitButton.addEventListener("click", closeSubmitModal);
 }
 
+// Map click handling for note placement during submission
+
 map.on("click", (event) => {
   if (!isSubmittingNote) return;
 
@@ -128,6 +136,8 @@ map.on("click", (event) => {
   }
 });
 
+// Map custom styling adjustments for a softer, night-themed aesthetic
+
 function layerExists(layerId) {
   return Boolean(map.getLayer(layerId));
 }
@@ -143,6 +153,8 @@ function setLayoutIfExists(layerId, property, value) {
     map.setLayoutProperty(layerId, property, value);
   }
 }
+
+// SoftNightStyle custom map adjustments based on MapTiler's Basic style layers
 
 function applySoftNightStyle() {
   // Background & residential color
@@ -221,6 +233,8 @@ function applySoftNightStyle() {
   setLayoutIfExists("Airport labels", "visibility", "none");
 }
 
+// Category-based coloring expression for note layers
+
 function categoryColourExpression() {
   return [
     "match",
@@ -233,6 +247,8 @@ function categoryColourExpression() {
     "#ffffff",
   ];
 }
+
+// Category filter button handling to show/hide notes by category
 
 function addCategoryFilters() {
   const buttons = document.querySelectorAll("[data-category]");
@@ -262,6 +278,8 @@ function addCategoryFilters() {
     });
   });
 }
+
+// Random note button handling to fly to a random note and open its popup
 
 function addRandomNoteButton() {
   const button = document.querySelector("#random-note-button");
@@ -299,10 +317,65 @@ function addRandomNoteButton() {
   });
 }
 
+// Function to create a custom note icon image using canvas, which can be used for future marker implementations
+
+function createNoteIconImage() {
+  const size = 64;
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = size;
+  canvas.height = size;
+
+  // Outer glow
+  const gradient = context.createRadialGradient(
+    size / 2,
+    size / 2,
+    4,
+    size / 2,
+    size / 2,
+    size / 2
+  );
+
+  gradient.addColorStop(0, "rgba(255, 248, 240, 1)");
+  gradient.addColorStop(0.35, "rgba(246, 181, 209, 0.95)");
+  gradient.addColorStop(1, "rgba(246, 181, 209, 0)");
+
+  context.fillStyle = gradient;
+  context.beginPath();
+  context.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+  context.fill();
+
+  // Main dot
+  context.fillStyle = "#fff8f0";
+  context.beginPath();
+  context.arc(size / 2, size / 2, 9, 0, Math.PI * 2);
+  context.fill();
+
+  // Small heart-ish mark
+  context.fillStyle = "#4F2D48";
+  context.font = "bold 18px serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText("♥", size / 2, size / 2 + 1);
+
+  return context.getImageData(0, 0, size, size);
+}
+
+// Map load event to set up sources, layers, styles, and interactions
+
 map.on("load", () => {
   console.log(map.getStyle().layers.map((layer) => layer.id));
-
+// Apply custom soft night style adjustments to the base map for a cohesive aesthetic with the note markers and popups
   applySoftNightStyle();
+// Add custom note icon image to the map style for  future use 
+    if (!map.hasImage("note-icon-image")) {
+    map.addImage("note-icon-image", createNoteIconImage(), {
+      pixelRatio: 2,
+    });
+  }
+
+  // Notes source from json 
 
   map.addSource("notes", {
     type: "geojson",
@@ -310,6 +383,9 @@ map.on("load", () => {
     promoteId: "id",
   });
 
+  // Layer order: soft glow, hover effect, then core circle for crispness and interactivity
+
+  // Soft glow layer with category-based coloring and dynamic sizing based on zoom level
   map.addLayer({
   id: "note-soft-area",
   type: "circle",
@@ -326,8 +402,8 @@ map.on("load", () => {
     "circle-blur": 1,
     "circle-opacity": 0.12,
     "circle-color": categoryColourExpression(),
-  },
-});
+    },
+  });
 
   map.addLayer({
     id: "note-glow",
