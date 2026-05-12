@@ -7,5 +7,6 @@ urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
     path("submit/", views.ConnectionNoteCreateView.as_view(), name="submit"),
     path("thanks/", views.ThanksView.as_view(), name="thanks"),
+    path("about/", views.AboutView.as_view(), name="about"),
     path("api/notes.geojson", views.approved_notes_geojson, name="approved_notes_geojson"),
 ]

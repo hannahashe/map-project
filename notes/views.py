@@ -21,6 +21,9 @@ class HomeView(TemplateView):
 class ThanksView(TemplateView):
     template_name = "notes/thanks.html"
 
+class AboutView(TemplateView):
+    template_name = "notes/about.html"
+
 
 class ConnectionNoteCreateView(CreateView):
     model = ConnectionNote
