@@ -1,7 +1,8 @@
 {% extends "notes/base.html" %} {% load static %} {% block content %}
 
 <!-- Filter Bar -->
-<div class="filter-bar" aria-label="Filter notes by category">
+<div class="filter-bar" aria-label="Filter notes by category"> 
+  <h2 class="filter-title">Filter by category:</h2>
   <button type="button" class="active" data-category="all">All</button>
   <button type="button" data-category="gratitude">Gratitude</button>
   <button type="button" data-category="recognition">Recognition</button>
@@ -10,10 +11,6 @@
   <button type="button" data-category="door_open">Door left open</button>
 </div>
 
-<!-- Random Note Button -->
-<button id="random-note-button" class="ghost-button" type="button">
-  Show me something kind
-</button>
 
 <!-- Map Shell -->
 <section class="map-shell">
@@ -30,15 +27,17 @@
  <button id="open-submit-modal" class="button" type="button">
   Leave a note
 </button>
+<button id="random-note-button" class="ghost-button" type="button">
+  Show me something kind
+</button>
+<button id="learn-more-button" class="button" type="button">
+  Learn more
+</button>
 
   </div>
 </section>
 
 <!-- Note form pop up -->
-<p id="location-status" class="location-status">
-  Click the map to place this note nearby, not exactly.
-</p>
-
 <div id="submit-modal" class="submit-modal" hidden>
   <div class="submit-modal-panel">
     <button id="close-submit-modal" type="button" class="modal-close">
@@ -50,17 +49,14 @@
 
     <form method="post" action="{% url 'notes:submit' %}" class="note-form">
       {% csrf_token %}
-
-      {{ form.title }}
-      {{ form.body }}
-      {{ form.category }}
-      {{ form.approximate_location_label }}
-      {{ form.latitude }}
-      {{ form.longitude }}
-      {{ form.door_left_open }}
-      {{ form.reconnection_note }} 
-      {{ form.safety_agreement }}
-
+      Title: {{ form.title }}
+      Note: {{ form.body }}
+      Category: {{ form.category }}
+       {{ form.latitude }}
+       {{ form.longitude }}
+      Door left open? {{ form.door_left_open }}
+      Reconnection Note: {{ form.reconnection_note }}
+      Have you read & agreed to our safety  agreement? {{ form.safety_agreement }}
       <button type="submit" class="button">Submit for moderation</button>
     </form>
   </div>
