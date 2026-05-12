@@ -1,0 +1,14 @@
+<!-- extend django template base.html for about page -->
+{% extends 'notes/base.html' %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">About</p>
+  <h1>Learn more about this project</h1>
+  <p> This project was inspired by Queering the Map by Lucas Roche, a beautiful project that explores the intersection of identity and space.
+    <br><br> This stylised map acts as a missed connections board, a memory map, a place to put undelivered gratitude, follow up on almost-friendship, and moments of recognition.
+    Inspired by mixed passions for creative cartography, web design and community impact, the developer hopes this project allows for fleeting moments to etch deeper, and for kindness to be shared in a new way.
+  </p>
+  <p>Developed by Hannah Ashe, using Django and Maplibre GL.</p>
+  <a href="{% url 'notes:home' %}" class="button">Back to the map</a>
+</section>
+{% endblock %}
