@@ -422,18 +422,17 @@ body {
 .filter-bar {
   position: fixed;
   bottom: 4.8rem;
-  left: 10%;
+  left: 13%;
   transform: translateX(-50%) rotate(-0.4deg);
   z-index: 18;
 
   gap: 0.5rem;
   justify-content: center;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1rem 1.5rem 0.6rem;
 
-  width: min(300px, calc(100% - 2rem));
+  width: min(400px, calc(100% - 2rem));
 
-  color: var(--muted);
-  background:var(--muted);
+  background:var(--panel);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
 }
@@ -447,15 +446,32 @@ body {
 }
 
 .filter-bar button {
-  color: var(--bg);
-  background: transparent;
-  border: 1px solid rgba(23, 19, 31, 0.25);
+  color: var(--text);
+  background: rgba(23, 19, 31, 0.55);
+  border: 1px solid rgba(23, 19, 31, 0.4);
   font-size: 18px;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  box-shadow: 6px 8px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
 }
 
 .filter-bar button:hover,
 .filter-bar button:active {
-  transform: uppercase;
+  transform: translateY(-1px);
+  background: rgba(23, 19, 31, 0.7);
+  border-color: rgba(23, 19, 31, 0.6);
+  box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.32);
+}
+
+.filter-bar button.active,
+.filter-bar button[aria-pressed="true"] {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(23, 19, 31, 0.82);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.38);
 }
 
 /* Ghost Button Styles */
